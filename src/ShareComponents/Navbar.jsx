@@ -84,7 +84,10 @@ const Navbar = () => {
                             
                         </ul>
                     </div>
-                    <img src="https://egamlio.vercel.app/images/logo.png" alt="" className="w-16 md:w-36" />
+                    <div className="flex justify-center items-center gap-2">
+                        <img src="https://i.ibb.co/7RVpQM8/community-06.png" alt="" className="w-12" />
+                        <p className="text-[#0ecdb9] font-bold text-2xl">ContestHub</p>
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 text-[18px] space-x-5 text-white">

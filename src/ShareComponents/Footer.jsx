@@ -1,4 +1,4 @@
-import { FaFacebook, FaGoogle, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaGoogle, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 
 const Footer = () => {
@@ -6,17 +6,21 @@ const Footer = () => {
     return (
         <footer className={`footer p-10 bg-[#1f2340]  text-white `}>
             <aside>
-                <img src="https://egamlio.vercel.app/images/logo.png" alt="" />
+                <div className="flex justify-center items-center gap-2">
+                    <img src="https://i.ibb.co/7RVpQM8/community-06.png" alt="" className="w-12" />
+                    <p className="text-[#0ecdb9] font-bold text-2xl">ContestHub</p>
+                </div>
                 <p>Contest Platform Industries Ltd.<br />Providing reliable tech since 1992</p>
                 <aside>
-                    <div className="flex justify-start space-x-7 py-5 text-3xl ">
+                    <div className="flex justify-start space-x-5 py-3 text-3xl ">
                         <FaGoogle></FaGoogle>
                         <FaFacebook></FaFacebook>
                         <FaTwitter></FaTwitter>
+                        <FaLinkedin />
                     </div>
 
 
-                    <p>Copyright © 2024 - All right reserved by Contest Platform || Egamilo Ltd</p>
+                    <p>Copyright © 2024 - All right reserved by Contest Platform || ContestHub Ltd</p>
                 </aside>
             </aside>
             <nav>
