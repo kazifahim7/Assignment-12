@@ -7,6 +7,8 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import useRole from "../hook/useRole";
+import useVerified from "../hook/useVerified";
 
 
 const Navbar = () => {
@@ -63,6 +65,13 @@ const Navbar = () => {
         })
 
     }
+
+    const [isPosition]=useRole()
+
+    console.log(isPosition)
+
+    const [isVerified]=useVerified()
+    console.log(isVerified)
 
 
 
@@ -122,7 +131,17 @@ const Navbar = () => {
                             {
                                 show && <div  className="absolute top-14 right-16 border-2 z-40 w-40 h-28 rounded-l-2xl rounded-b-2xl bg-[#1f2340] p-5 text-white ">
 
-                                    <NavLink to={'/dashBoard'}>DashBoard</NavLink>
+                                    
+
+                                    {
+                                        isPosition === 'admin' && <NavLink to={'/dashboard/ManageUser'}>DashBoard</NavLink>
+                                    }
+                                    {
+                                        isPosition === 'host' && <NavLink to={'/dashboard/AddContest'}>DashBoard</NavLink>
+                                    }
+                                    {
+                                        isPosition === 'user' && <NavLink to={'/dashboard/myContest'}>DashBoard</NavLink>
+                                    }
 
                                     <button onClick={handleOut} className="btn bg-[#0ecdb9] border-none mt-2 text-white">LogOut<FaLongArrowAltRight /> </button>
                                   

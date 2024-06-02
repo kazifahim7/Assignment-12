@@ -9,7 +9,7 @@ const InsPire = () => {
                     <div className="max-w-md">
                         <h4 className="uppercase text-xl text-[#0ecdb9] ">BECOME A SUCCESSFUL Person</h4>
                         <h1 className="mb-5 text-5xl font-bold uppercase">GET THE contest <br /> YOU WANT</h1>
-                        <p className="mb-5">Discover a new way to develop your talents with Egamlio by participating in our diverse contest offerings.Egamlio is a platform designed for individuals seeking to enhance their skills by participating in various contests.</p>
+                        <p className="mb-5">Discover a new way to develop your talents with ContestHub by participating in our diverse contest offerings.ContestHub is a platform designed for individuals seeking to enhance their skills by participating in various contests.</p>
                         <button className="btn btn-accent">LogIn Now <FaLongArrowAltRight></FaLongArrowAltRight></button>
                     </div>
 

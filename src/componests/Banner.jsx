@@ -25,7 +25,7 @@ const Banner = () => {
             </div>
 
             <div className="">
-                <div className="flex justify-center  md:-mt-12   ">
+                <div className="flex justify-center -mt-3  md:-mt-12   ">
                     <div className="stats shadow z-10 bg-[#1b1d4d]">
 
                         <div className="stat">

@@ -9,6 +9,9 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false)
     const axiosPublic=usePublicAxios()
     const provider = new GoogleAuthProvider();
+    
+
+
 
 
     const createUser = (email, password) => {
@@ -35,11 +38,37 @@ const AuthProvider = ({children}) => {
     }
     useEffect(() => {
         const unsubsCribed = onAuthStateChanged(auth, (currentUser) => {
-            setLoading(false)
+            
             setUser(currentUser)
-            // const currenUserEmail = currentUser?.email || user?.email
+            
 
-            // const userEmail = { email: currenUserEmail }
+            if(currentUser){
+                const currenUserEmail = currentUser?.email || user?.email
+
+                const userEmail = { email: currenUserEmail }
+
+                axiosPublic.post('/jwt', userEmail)
+                        .then((data) => {
+                            if(data.data.token){
+                               
+                                localStorage.setItem('access-token',data.data?.token)
+                                setLoading(false)
+                            }
+
+                            
+                            
+                            
+                        
+                        })
+                        
+                
+
+
+            }
+            else{
+                localStorage.removeItem('access-token')
+                setLoading(false)
+            }
 
 
             // if (currentUser) {

@@ -10,6 +10,7 @@ import axios from "axios";
 import { updateProfile } from "firebase/auth";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import usePublicAxios from "../hook/usePublicAxios";
 
 
 
@@ -20,6 +21,8 @@ const Register = () => {
     const [set, setNow] = useState(true)
     const navigate = useNavigate()
     const location = useLocation()
+
+    const axiosPublic=usePublicAxios()
 
     useEffect(() => {
         loadCaptchaEnginge(6, '#0ecdb9')
@@ -93,6 +96,22 @@ const Register = () => {
                         displayName: name, photoURL: imageUrl
                     })
                         .then(() => {
+                            const userInfo={
+                                name,
+                                image: imageUrl,
+                                status:'verified',
+                                role: 'user',
+                                email
+                            }
+
+                            axiosPublic.post('/users', userInfo)
+                                .then(data => console.log(data.data))
+
+
+
+
+
+
                             Swal.fire({
                                 title: "registration success",
                                 text: "You clicked the button!",
@@ -126,6 +145,19 @@ const Register = () => {
         googleLog()
             .then(data => {
                 const currentUser = data.user;
+                const userInfo = {
+                    name: data.user?.displayName, 
+                    image: data.user?.photoURL,
+                    status: 'verified',
+                    role: 'user',
+                    email: data.user?.email,
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(data => console.log(data.data))
+
+
+
                 console.log('i am from google', currentUser)
                 Swal.fire({
                     title: "Google logIn success",
