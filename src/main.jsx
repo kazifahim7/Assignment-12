@@ -20,6 +20,7 @@ import {
 import Dashboard from './DashBoard/Dashboard';
 import ManageUser from './AdminPage/ManageUser';
 import ContestAdd from './hostpage/ContestAdd';
+import MyContest from './hostpage/MyContest';
 
 
 const queryClient = new QueryClient()
@@ -57,7 +58,12 @@ const router = createBrowserRouter([
       {
         path:'AddContest',
         element:<ContestAdd></ContestAdd>
+      },
+      {
+        path:'myContest',
+        element:<MyContest></MyContest>
       }
+
     ]
   }
 ]);
