@@ -14,13 +14,24 @@ body{
    font-family: "Roboto", sans-serif;
 }
 
-.embla {
-  overflow: hidden;
+
+.custom-datepicker {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
 }
-.embla__container {
-  display: flex;
+
+.custom-datepicker input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
 }
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
+
+.custom-datepicker input:focus {
+    border: 1px solid #007BFF;
 }
+

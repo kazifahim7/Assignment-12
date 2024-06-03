@@ -125,7 +125,7 @@ const Navbar = () => {
                     {
                         user ? <div title={user?.displayName} onClick={handleClick} className="avatar">
                             <div className="w-16 rounded-full border-4">
-                                <img src={user?.photoURL} />
+                                <img src={user?.photoURL} alt="loading"/>
                             </div>
 
                             {

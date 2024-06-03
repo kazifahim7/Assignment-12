@@ -18,6 +18,9 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import Dashboard from './DashBoard/Dashboard';
+import ManageUser from './AdminPage/ManageUser';
+import ContestAdd from './hostpage/ContestAdd';
+
 
 const queryClient = new QueryClient()
 
@@ -44,7 +47,18 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashBoard',
-    element:<Dashboard></Dashboard>
+    element:<Dashboard></Dashboard>,
+    children:[
+      {
+        path: 'ManageUser',
+        element:<ManageUser></ManageUser>
+
+      },
+      {
+        path:'AddContest',
+        element:<ContestAdd></ContestAdd>
+      }
+    ]
   }
 ]);
 
