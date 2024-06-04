@@ -1,5 +1,25 @@
+import { useContext, useRef } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+    const textRef=useRef()
+    const navigate=useNavigate()
+       
+    const { setInputData}=useContext(AuthContext)
+    const handleClick=()=>{
+        const value=textRef.current.value;
+        setInputData(value)
+
+        textRef.current.value=''
+
+        navigate('/allContest')
+       
+        
+    }
+
+
+
     return (
         <div>
             <div className="hero  " style={{ backgroundImage: 'url(https://i.ibb.co/0Fz5h7H/index-overlay.png)', height: '650px' }}>
@@ -10,9 +30,9 @@ const Banner = () => {
                         <p className="mb-5 text-white">Get better and unlock your potential in the contest you love most.</p>
 
                         <div className="relative">
-                            <input type="text" placeholder="Contest Name" className="input input-bordered w-full  h-14" />
+                            <input type="text" ref={textRef} placeholder="Contest Name" className="input input-bordered w-full  h-14" />
                             
-                                <button className="btn bg-[#0ecdb9] border-none text-white absolute right-1 w-18 mt-1 ">search</button>
+                            <button onClick={handleClick} className="btn bg-[#0ecdb9] border-none text-white absolute right-1 w-18 mt-1 ">search</button>
                             
                         </div>
 

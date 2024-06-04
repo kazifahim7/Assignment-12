@@ -21,11 +21,18 @@ import Dashboard from './DashBoard/Dashboard';
 import ManageUser from './AdminPage/ManageUser';
 import ContestAdd from './hostpage/ContestAdd';
 import MyContest from './hostpage/MyContest';
+import Update from './hostpage/Update';
+import ManageContest from './AdminPage/ManageContest';
+import AllContest from './Pages/Allcontest';
+
+
 
 
 const queryClient = new QueryClient()
 
+
 const router = createBrowserRouter([
+  
   {
     path: "/",
     errorElement: <Error></Error>,
@@ -42,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:'/signup',
         element: <Register></Register>
+      },
+      {
+        path:'/allContest',
+        element:<AllContest></AllContest>
       }
     ],
     
@@ -62,6 +73,15 @@ const router = createBrowserRouter([
       {
         path:'myContest',
         element:<MyContest></MyContest>
+      },
+      {
+        path:'update/:id',
+        element:<Update></Update>,
+        loader: ({ params }) => fetch(`http://localhost:7000/single/contest/${params.id}`)
+      },
+      {
+        path: 'ManageContests',
+        element:<ManageContest></ManageContest>
       }
 
     ]

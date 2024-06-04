@@ -8,13 +8,16 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import useAxios from "../hook/useAxios";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import { useNavigate } from "react-router-dom";
+import { ImSpinner9 } from "react-icons/im";
 
 const ContestAdd = () => {
     const [isVerified] = useVerified();
     const [startDate, setStartDate] = useState(new Date());
 
-    const {user,setLoading}=useContext(AuthContext)
+    const { user, setLoading, loading }=useContext(AuthContext)
     const axiosSecure=useAxios()
+    const navigate=useNavigate()
 
 
     
@@ -53,6 +56,7 @@ const ContestAdd = () => {
                 status:'pending',
                 comments:'improved It',
                 dates:startDate,
+                hostImage: user?.photoURL
 
 
 
@@ -64,6 +68,10 @@ const ContestAdd = () => {
             .then(data=>{
                 if(data.data){
                     Swal.fire("added and wait for admin approve!");
+                    
+                    navigate('/dashboard/myContest')
+                    setLoading(false)
+
                 }
                 e.target.reset()
             })
@@ -73,7 +81,13 @@ const ContestAdd = () => {
         }
         catch(error){
             console.log(error)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
         }
+        setLoading(false)
     }
 
     return (
@@ -86,9 +100,10 @@ const ContestAdd = () => {
                             <span className="label-text">Contest Name*</span>
                         </label>
                         <input {...register("contestName", { required: true })} type="text" placeholder="Contest Name" className="input input-bordered"  />
+                        {errors.contestName && <span className="text-red-600">This field is required</span>}
                        
                     </div>
-                    {errors.contestName && <span className="text-red-600">This field is required</span>}
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Image*</span>
@@ -101,31 +116,35 @@ const ContestAdd = () => {
                             <span className="label-text">Contest Description*</span>
                         </label>
                         <textarea {...register("description", { required: true })} className="textarea textarea-bordered" placeholder="Contest Description"></textarea>
+                        {errors.description && <span className="text-red-600">This field is required</span>}
                     </div>
-                    {errors.description && <span className="text-red-600">This field is required</span>}
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Task*</span>
                         </label>
                         <textarea {...register("task", { required: true })} className="textarea textarea-bordered" placeholder="Task"></textarea>
+                        {errors.task && <span className="text-red-600">This field is required</span>}
                     </div>
-                    {errors.task && <span className="text-red-600">This field is required</span>}
+                    
                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Prize money*</span>
                         </label>
                         <input {...register("prize", { required: true })} type="text" placeholder="Prize money" className="input input-bordered" />
+                        {errors.prize && <span className="text-red-600">This field is required</span>}
                     </div>
-                    {errors.prize && <span className="text-red-600">This field is required</span>}
+                    
                     
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Contest Price*</span>
                         </label>
                         <input type="number" {...register("price", { required: true })}  placeholder="Contest Price" className="input input-bordered" required />
+                        {errors.price && <span className="text-red-600">This field is required</span>}
                     </div>
-                    {errors.price && <span className="text-red-600">This field is required</span>}
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Contest Type/Tags*</span>
@@ -143,8 +162,9 @@ const ContestAdd = () => {
                             <option>Business Idea</option>
                             <option>Movie Review</option>
                         </select>
+                        {errors.contestType && <span className="text-red-600">This field is required</span>}
                     </div>
-                    {errors.contestType && <span className="text-red-600">This field is required</span>}
+                    
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Deadline*</span>
@@ -161,7 +181,7 @@ const ContestAdd = () => {
                         </button>
                     ) : (
                         <button className="btn bg-[#0ecdb9] border-none w-full mt-2 text-white md:col-span-2">
-                            Add Now
+                                {loading ? <ImSpinner9 className='animate-spin mx-auto'></ImSpinner9> : 'Add now'}
                         </button>
                     )}
                 </form>

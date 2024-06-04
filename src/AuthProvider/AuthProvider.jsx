@@ -9,6 +9,8 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false)
     const axiosPublic=usePublicAxios()
     const provider = new GoogleAuthProvider();
+
+    const [inputData,setInputData]=useState('')
     
 
 
@@ -90,6 +92,8 @@ const AuthProvider = ({children}) => {
         return () => unsubsCribed()
     }, [axiosPublic, user])
 
+    console.log(inputData)
+
 
 
     const info = {
@@ -99,7 +103,9 @@ const AuthProvider = ({children}) => {
         logIn,
         logout,
         googleLog,
-        setLoading
+        setLoading,
+        setInputData,
+        inputData
 
     }
     return (
