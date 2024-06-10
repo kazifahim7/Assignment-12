@@ -1,7 +1,13 @@
+
 import SLiderINfo from "./SLiderINfo";
 
 
+
 const Slider = () => {
+ 
+
+
+
     return (
         <div className="  bg-bottom" style={{ backgroundImage: 'url(https://i.ibb.co/xjyQqLf/how-works-bg.png)' }}>
 

@@ -8,7 +8,10 @@ import 'sweetalert2/src/sweetalert2.scss'
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { ImSpinner9 } from "react-icons/im";
 
 
 const Update = () => {
@@ -19,26 +22,54 @@ const Update = () => {
    
     const axiosSecure = useAxios()
     const navigate=useNavigate()
+
+    const { loading,setLoading }=useContext(AuthContext)
     
 
 
 
   
 
-    const onSubmit =  (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         const contestName = e.target.contestName.value;
-        const image = e.target.image.value;
+        const image = e.target.photo.files[0];
         const description = e.target.description.value;
         const task = e.target.task.value;
         const prize = e.target.prize.value;
         const price = e.target.price.value;
         const contestType =e.target.category.value;
         const dates=startDate;
+        setLoading(true);
+
+        let imageUrl = singleData?.image
+
+        if (image) {
+            console.log("Uploading new image:", image);
+
+            const formData = new FormData();
+            formData.append('image', image);
+
+
+
+            try {
+                const imageResponse = await axios.post(
+                    `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_APT_KEY}`,
+                    formData,
+                    { headers: { 'Content-Type': 'multipart/form-data' } }
+                );
+
+                imageUrl = imageResponse.data.data.display_url;
+            } catch (imageUploadError) {
+                console.error('Error uploading image:', imageUploadError);
+                
+                return;
+            }
+        }
 
         const info={
             contestName,
-            image,
+            image:imageUrl,
             description,
             task,
             prize,
@@ -51,8 +82,10 @@ const Update = () => {
         axiosSecure.put(`/updateSingleData/${singleData?._id}`,info)
         .then(data=>{
             if(data.data){
+                setLoading(false)
                 Swal.fire("Updated");
                 navigate('/dashboard/myContest')
+
 
             }
         })
@@ -90,7 +123,8 @@ const Update = () => {
                         <label className="label">
                             <span className="label-text">image*</span>
                         </label>
-                        <input defaultValue={singleData?.image}name="image" type="text" placeholder="" className="input input-bordered" />
+                        
+                        <input type="file" name="photo" className="file-input file-input-bordered file-input-accent w-full" />
 
                     </div>
                    
@@ -160,7 +194,7 @@ const Update = () => {
                         </button>
                     ) : (
                         <button className="btn bg-[#0ecdb9] border-none w-full mt-2 text-white md:col-span-2">
-                           Update now
+                                {loading ? <ImSpinner9 className='animate-spin mx-auto'></ImSpinner9> : 'Save'}
                         </button>
                     )}
                 </form>

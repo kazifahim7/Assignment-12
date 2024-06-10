@@ -170,7 +170,7 @@ const ManageUser = () => {
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
-                    <thead className="bg-[#0ecdb9]">
+                    <thead className="bg-[#4684c7] text-white">
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
@@ -189,7 +189,7 @@ const ManageUser = () => {
                                 <td>
 
                                     <div className="dropdown dropdown-right ">
-                                        <div tabIndex={0} role="button" className="btn m-1 bg-[#0ecdb9]">Change Role</div>
+                                        <div tabIndex={0} role="button" className="btn m-1 bg-[#0ecdb9] text-white">Change Role</div>
                                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                             <li onClick={() => changeRole(user._id, 'admin')}><a>Admin</a></li>
                                             <li onClick={() => changeRole(user._id, 'host')}><a>Host</a></li>
@@ -198,7 +198,7 @@ const ManageUser = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    <button onClick={()=>handleDelete(user._id)} className="btn bg-[#0ecdb9]">Delete</button>
+                                    <button onClick={()=>handleDelete(user._id)} className="btn bg-[#0ecdb9] text-white">Delete</button>
 
                                     {
                                         user?.status === 'verified' ? <button onClick={() => handleBlock(user._id, 'block')} className="btn bg-[#e04141] text-white">Block</button> : <button onClick={() => handleBlock(user._id, 'verified')} className="btn bg-[#e04141] text-white">unBlock</button>

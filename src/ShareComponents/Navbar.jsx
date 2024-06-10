@@ -140,7 +140,7 @@ const Navbar = () => {
                                         isPosition === 'host' && <NavLink to={'/dashboard/AddContest'}>DashBoard</NavLink>
                                     }
                                     {
-                                        isPosition === 'user' && <NavLink to={'/dashboard/myContest'}>DashBoard</NavLink>
+                                        isPosition === 'user' && <NavLink to={'/dashboard/participate'}>DashBoard</NavLink>
                                     }
 
                                     <button onClick={handleOut} className="btn bg-[#0ecdb9] border-none mt-2 text-white">LogOut<FaLongArrowAltRight /> </button>

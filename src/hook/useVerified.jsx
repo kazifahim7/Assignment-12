@@ -8,7 +8,7 @@ const useVerified = () => {
     const { user, loading } = useContext(AuthContext)
     const axiosSecure = useAxios()
 
-    const { data: isVerified = [] } = useQuery({
+    const { data: isVerified = [],isLoading } = useQuery({
         queryKey: ['veriFied', user?.email],
         enabled: !loading,
         queryFn: async () => {
@@ -25,7 +25,7 @@ const useVerified = () => {
 
 
 
-    return [isVerified]
+    return [isVerified,isLoading]
 };
 
 export default useVerified;

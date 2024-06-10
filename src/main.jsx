@@ -24,6 +24,18 @@ import MyContest from './hostpage/MyContest';
 import Update from './hostpage/Update';
 import ManageContest from './AdminPage/ManageContest';
 import AllContest from './Pages/Allcontest';
+import Details from './componests/Details';
+
+import Private from './Private/Private';
+import HostPrivate from './Private/HostPrivate';
+import AdMinPrivate from './Private/AdMinPrivate';
+import RegisterContest from './UserDashboard/RegisterContest';
+import Payment from './UserDashboard/Payment';
+import MyParticipate from './UserDashboard/MyParticipate';
+import MyProfile from './UserDashboard/MyProfile';
+import SubmitedPage from './hostpage/SubmitedPage';
+import SeeSubmisson from './hostpage/SeeSubmisson';
+
 
 
 
@@ -43,6 +55,11 @@ const router = createBrowserRouter([
         element:<HOme></HOme>
       },
       {
+        path: '/allContests/:id',
+        element: <Private><Details></Details></Private>,
+        loader: ({ params }) => fetch(`http://localhost:7000/singleData/details/${params.id}`)
+      },
+      {
         path:'/login',
         element:<LogInPage></LogInPage>
       },
@@ -53,7 +70,17 @@ const router = createBrowserRouter([
       {
         path:'/allContest',
         element:<AllContest></AllContest>
+      },
+      {
+        path: 'register',
+        element: <RegisterContest></RegisterContest>
+      },
+      {
+        path:'/payment/:id',
+        element:<Payment></Payment>,
+        loader: ({params}) => fetch(`http://localhost:7000/getSingleContest/${params.id}`)
       }
+     
     ],
     
   },
@@ -63,12 +90,12 @@ const router = createBrowserRouter([
     children:[
       {
         path: 'ManageUser',
-        element:<ManageUser></ManageUser>
+        element: <AdMinPrivate><ManageUser></ManageUser></AdMinPrivate>
 
       },
       {
         path:'AddContest',
-        element:<ContestAdd></ContestAdd>
+        element: <HostPrivate><ContestAdd></ContestAdd></HostPrivate>
       },
       {
         path:'myContest',
@@ -81,8 +108,26 @@ const router = createBrowserRouter([
       },
       {
         path: 'ManageContests',
-        element:<ManageContest></ManageContest>
+        element: <AdMinPrivate><ManageContest></ManageContest></AdMinPrivate>
+      },
+      {
+        path:'participate',
+        element:<MyParticipate></MyParticipate>
+      },
+      {
+        path:'myProfile',
+        element:<MyProfile></MyProfile>
+
+      },
+      {
+        path:'submitted',
+        element:<SubmitedPage></SubmitedPage>
+      },
+      {
+        path:'submission',
+        element:<SeeSubmisson></SeeSubmisson>
       }
+     
 
     ]
   }

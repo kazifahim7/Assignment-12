@@ -87,7 +87,7 @@ const Register = () => {
             console.log(name, email, password, imageUrl)
 
 
-            await createUser(email, password)
+            createUser(email, password)
                 .then(data => {
                     const currentUser = data.user;
                     console.log(currentUser)
@@ -131,7 +131,8 @@ const Register = () => {
 
 
         } catch (error) {
-            toast.error('invalid info', error.massage)
+            toast.error('invalid info')
+            setLoading(false)
         }
 
 

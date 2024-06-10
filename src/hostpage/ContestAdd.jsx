@@ -15,9 +15,11 @@ const ContestAdd = () => {
     const [isVerified] = useVerified();
     const [startDate, setStartDate] = useState(new Date());
 
-    const { user, setLoading, loading }=useContext(AuthContext)
+    const { user}=useContext(AuthContext)
     const axiosSecure=useAxios()
     const navigate=useNavigate()
+
+    const [loading,setLoading]=useState(false)
 
 
     
@@ -31,6 +33,9 @@ const ContestAdd = () => {
     const onSubmit = async(data,e) => {
         console.log(data)
         const image=e.target.image.files[0]
+        if (!image) {
+            return Swal.fire("please choose a picture");
+        }
         
        
         const formData = new FormData()
@@ -39,6 +44,8 @@ const ContestAdd = () => {
             setLoading(true)
             const imageResponse = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_APT_KEY}`, formData)
             const imageUrl = imageResponse.data.data.display_url
+
+            
           
 
 
@@ -47,7 +54,7 @@ const ContestAdd = () => {
                 contestType: data?.contestType,
                 description: data?.description,
                 price: data?.price,
-                prize: data?.price,
+                prize: data?.prize,
                 task: data?.task,
                 image:imageUrl,
                 hostName: user?.displayName,

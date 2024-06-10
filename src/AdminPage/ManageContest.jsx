@@ -1,16 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "../hook/useAxios";
 
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import useAxios from "../hook/useAxios";
+
+
 
 
 const ManageContest = () => {
     const useAxiosSecure=useAxios()
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const comment = useRef()
+   const textRef=useRef()
+
+
+   const [id,setId]=useState(null)
+    
    
 
     const {data:allCOntest=[],refetch,isLoading}=useQuery({
@@ -73,17 +79,22 @@ const ManageContest = () => {
         });
     }
     
-
-    const handleUpdate=id=>{
+    
+    const handleUpdate=async()=>{
+        
+        // let message = textRef.current.value; 
         console.log(id)
-        const massage=comment.current.value;
-        console.log(massage)
+
+        const text = document.getElementById('text')
+        let message= text.value;
+       
+        console.log(message)
 
         const info={
-            comments:massage
+            comment:message
         }
 
-        useAxiosSecure.put(`/sendMassage/${id}`,info)
+       await useAxiosSecure.put(`/sendMassage/${id}`,info)
         .then(data=>{
             console.log(data.data)
             Swal.fire("massage send");
@@ -133,7 +144,7 @@ const ManageContest = () => {
 
                         {
                             allCOntest.map(contest => <tr key={contest._id}>
-                                <th>{contest.contestName}</th>
+                                <th title={contest._id}>{contest.contestName}</th>
                                 <td>{contest.contestType}</td>
                                 <td>{contest.status}</td>
                                 <td>
@@ -150,7 +161,12 @@ const ManageContest = () => {
                                 </td>
 
                                 <td>
-                                    <button onClick={() => document.getElementById('my_modal_3').showModal()} className="btn bg-[#41b8e0] text-white">send comments</button>
+                                    <button  onClick={() => {
+                                        document.getElementById('my_modal_3').showModal()
+                                        setId(contest._id)
+                                        
+                                        
+                                        }} className="btn bg-[#41b8e0] text-white">send comments</button>
 
                                     <dialog id="my_modal_3" className="modal">
                                         <div className="modal-box">
@@ -158,11 +174,17 @@ const ManageContest = () => {
                                             <form method="dialog">
                                                 {/* if there is a button in form, it will close the modal */}
                                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                <textarea id="text" ref={textRef} className="textarea  textarea-info w-full" placeholder="Bio"></textarea>
+                                                <button onClick={handleUpdate} className="btn bg-[#41b8e0] text-white w-full">send</button>
+                                                
 
-                                                <textarea ref={comment} className="textarea textarea-bordered w-full" placeholder="---"></textarea>
-                                                <button onClick={() => handleUpdate(contest._id)} className="btn bg-[#41b8e0] text-white w-full">send</button>
-                                               
-                                            </form>
+                                                
+                                                
+                                                </form>
+
+                                           
+                                           
+                                           
                                             
                                             
                                             

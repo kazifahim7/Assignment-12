@@ -12,47 +12,47 @@ import 'sweetalert2/src/sweetalert2.scss'
 const LogInPage = () => {
     const [display, setDisplay] = useState(false);
 
-    const { logIn, googleLog, loading, setLoading }=useContext(AuthContext)
+    const { logIn, googleLog, loading, setLoading } = useContext(AuthContext)
 
-    const navigate=useNavigate()
-    const location=useLocation()
+    const navigate = useNavigate()
+    const location = useLocation()
 
 
-    const handleLogIn=(e)=>{
+    const handleLogIn = (e) => {
         e.preventDefault();
-        const email=e.target.email.value;
-        const password=e.target.password.value;
-        console.log(email,password);
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log(email, password);
 
-        logIn(email,password)
-        .then(()=>{
-            Swal.fire({
-                title: "LogIn success",
-                text: "You clicked the button!",
-                icon: "success"
-            }); 
-            navigate(location?.state?location.state:'/')
-            e.target.reset()
+        logIn(email, password)
+            .then(() => {
+                Swal.fire({
+                    title: "LogIn success",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
+                navigate(location?.state ? location.state : '/')
+                e.target.reset()
 
-        })
-        .catch((error)=>{
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                
-            });
-            setLoading(false)
-            console.log(error)
-        
-        })
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+
+                });
+                setLoading(false)
+                console.log(error)
+
+            })
 
 
 
 
     }
 
-    const googleLogin=()=>{
+    const googleLogin = () => {
         googleLog()
             .then(data => {
                 const currentUser = data.user;
@@ -150,7 +150,7 @@ const LogInPage = () => {
                                     >
                                         {loading ? <ImSpinner9 className='animate-spin mx-auto'></ImSpinner9> : 'Continue'}
                                     </button>
-                                   
+
                                 </div>
                             </form>
                             <div className='flex items-center pt-4 space-x-1'>
@@ -162,7 +162,7 @@ const LogInPage = () => {
                             </div>
                             <div
 
-                                onClick={googleLogin} 
+                                onClick={googleLogin}
 
 
                                 className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
@@ -182,7 +182,7 @@ const LogInPage = () => {
                             </p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

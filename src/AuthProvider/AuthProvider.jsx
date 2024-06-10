@@ -11,6 +11,11 @@ const AuthProvider = ({children}) => {
     const provider = new GoogleAuthProvider();
 
     const [inputData,setInputData]=useState('')
+
+
+    const [title, setTitle] = useState('Book Competition')
+
+    console.log(title)
     
 
 
@@ -41,27 +46,33 @@ const AuthProvider = ({children}) => {
     useEffect(() => {
         const unsubsCribed = onAuthStateChanged(auth, (currentUser) => {
             
-            setUser(currentUser)
+            
+            
             
 
             if(currentUser){
+                
                 const currenUserEmail = currentUser?.email || user?.email
 
                 const userEmail = { email: currenUserEmail }
 
                 axiosPublic.post('/jwt', userEmail)
                         .then((data) => {
+                            
                             if(data.data.token){
                                
                                 localStorage.setItem('access-token',data.data?.token)
-                                setLoading(false)
+                                
+                                
                             }
+                            setLoading(false)
 
                             
                             
                             
                         
                         })
+               
                         
                 
 
@@ -85,7 +96,7 @@ const AuthProvider = ({children}) => {
             // }
 
 
-
+            setUser(currentUser)
             console.log(currentUser)
 
         })
@@ -105,7 +116,10 @@ const AuthProvider = ({children}) => {
         googleLog,
         setLoading,
         setInputData,
-        inputData
+        inputData,
+        setTitle,
+        title
+
 
     }
     return (
