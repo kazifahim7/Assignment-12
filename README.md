@@ -42,4 +42,4 @@ For more details and to contribute, visit our [GitHub Repository](https://github
 
 ## Contact Us
 
-If you have any questions or need support, please reach out to us at [support@contesthub.com](mailto:support@contesthub.com).
+If you have any questions or need support, please reach out to us at [support@contesthub.com](kazifahim661@gmail.com).
