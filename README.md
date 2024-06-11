@@ -23,8 +23,7 @@ Welcome to ContestHub, the ultimate platform where innovation meets recognition!
 
 ## Extra Routes
 
-- **/faq:** Frequently Asked Questions
-- **/guidelines:** Contest Guidelines
+
 - **/upcoming:** Upcoming Contests
 - **/news:** Contest News
 
