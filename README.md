@@ -6,7 +6,7 @@ Welcome to ContestHub, the ultimate platform where innovation meets recognition!
 
 - **Admin Username:** admin
 - **Admin Password:** ContestHub@2024
-- **Live Site URL:** [https://www.contesthub.com](https://www.contesthub.com)
+- **Live Site URL:** [https://assignmnet12-b0976.web.app/](https://assignmnet12-b0976.web.app/)
 
 ## Key Features
 
