@@ -90,6 +90,7 @@ const Navbar = () => {
                             <NavLink to={'/allContest'}>All contest</NavLink>
                             <NavLink to={'/LeaderBoard'}>LeaderBoard</NavLink>
                             <NavLink to={'/upcomingContest'}>Upcoming</NavLink>
+                            <NavLink to={'/news'}>News</NavLink>
                             
                         </ul>
                     </div>
@@ -104,6 +105,7 @@ const Navbar = () => {
                         <NavLink to={'/allContest'}>All contest</NavLink>
                         <NavLink to={'/LeaderBoard'}>LeaderBoard</NavLink>
                         <NavLink to={'/upcomingContest'}>Upcoming</NavLink>
+                        <NavLink to={'/news'}>News</NavLink>
                     </ul>
                 </div>
                 <div className="navbar-end space-x-3">

@@ -5,13 +5,13 @@ import axios from "axios";
 
 
 const usePagi = () => {
-  const {user}=useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
-  const {data:count=[]}=useQuery({
-    queryKey:['myparticipate',user?.email],
-    queryFn:async()=>{
-        const result = await axios.get(`http://localhost:7000/count/my/contest/${user?.email}`)
-        return result.data.count
+  const { data: count = [] } = useQuery({
+    queryKey: ['myparticipate', user?.email],
+    queryFn: async () => {
+      const result = await axios.get(`https://serversite12.vercel.app/count/my/contest/${user?.email}`)
+      return result.data.count
     }
   })
 

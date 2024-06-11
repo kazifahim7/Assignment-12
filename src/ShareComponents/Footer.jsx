@@ -1,4 +1,5 @@
 import { FaFacebook, FaGoogle, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -13,10 +14,10 @@ const Footer = () => {
                 <p>Contest Platform Industries Ltd.<br />Providing reliable tech since 1992</p>
                 <aside>
                     <div className="flex justify-start space-x-5 py-3 text-3xl ">
-                        <FaGoogle></FaGoogle>
-                        <FaFacebook></FaFacebook>
-                        <FaTwitter></FaTwitter>
-                        <FaLinkedin />
+                        <Link ><FaGoogle></FaGoogle></Link>
+                        <Link ><FaFacebook></FaFacebook></Link>
+                        <Link ><FaTwitter></FaTwitter></Link>
+                        <Link ><FaLinkedin /></Link>
                     </div>
 
 

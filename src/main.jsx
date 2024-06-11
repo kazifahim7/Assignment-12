@@ -38,6 +38,7 @@ import SeeSubmisson from './hostpage/SeeSubmisson';
 import WiningContest from './UserDashboard/WiningContest';
 import Upcoming from './Pages/Upcoming';
 import LeaderBoard from './Pages/LeaderBoard';
+import News from './Pages/News';
 
 
 
@@ -48,108 +49,112 @@ const queryClient = new QueryClient()
 
 
 const router = createBrowserRouter([
-  
+
   {
     path: "/",
     errorElement: <Error></Error>,
     element: <MainLayout></MainLayout>,
-    children:[
+    children: [
       {
         path: '/',
-        element:<HOme></HOme>
+        element: <HOme></HOme>
       },
       {
-        path:'/LeaderBoard',
-        element:<LeaderBoard></LeaderBoard>
+        path: '/LeaderBoard',
+        element: <LeaderBoard></LeaderBoard>
 
       },
       {
         path: '/allContests/:id',
         element: <Private><Details></Details></Private>,
-        loader: ({ params }) => fetch(`http://localhost:7000/singleData/details/${params.id}`)
+        loader: ({ params }) => fetch(`https://serversite12.vercel.app/singleData/details/${params.id}`)
       },
       {
-        path:'/login',
-        element:<LogInPage></LogInPage>
+        path: '/login',
+        element: <LogInPage></LogInPage>
       },
       {
-        path:'/signup',
+        path: '/signup',
         element: <Register></Register>
       },
       {
-        path:'/allContest',
-        element:<AllContest></AllContest>,
-        loader: () => fetch('http://localhost:7000/allData')
+        path: '/allContest',
+        element: <AllContest></AllContest>,
+        loader: () => fetch('https://serversite12.vercel.app/allData')
       },
       {
         path: 'register',
         element: <RegisterContest></RegisterContest>
       },
       {
-        path:'/payment/:id',
-        element:<Payment></Payment>,
-        loader: ({params}) => fetch(`http://localhost:7000/getSingleContest/${params.id}`)
+        path: '/payment/:id',
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`https://serversite12.vercel.app/getSingleContest/${params.id}`)
       },
       {
-        path:'/upcomingContest',
-        element:<Upcoming></Upcoming>
+        path: '/upcomingContest',
+        element: <Upcoming></Upcoming>
+      },
+      {
+        path: '/news',
+        element: <News></News>
       }
-     
+
     ],
-    
+
   },
   {
     path: '/dashBoard',
-    element:<Dashboard></Dashboard>,
-    children:[
+    element: <Dashboard></Dashboard>,
+    children: [
       {
         path: 'ManageUser',
         element: <AdMinPrivate><ManageUser></ManageUser></AdMinPrivate>,
-        loader: () => fetch('http://localhost:7000/allusers')
+        loader: () => fetch('https://serversite12.vercel.app/allusers')
 
       },
       {
-        path:'AddContest',
+        path: 'AddContest',
         element: <HostPrivate><ContestAdd></ContestAdd></HostPrivate>
       },
       {
-        path:'myContest',
+        path: 'myContest',
         element: <HostPrivate><MyContest></MyContest></HostPrivate>,
-        
+
       },
       {
-        path:'update/:id',
-        element:<Update></Update>,
-        loader: ({ params }) => fetch(`http://localhost:7000/single/contest/${params.id}`)
+        path: 'update/:id',
+        element: <Update></Update>,
+        loader: ({ params }) => fetch(`https://serversite12.vercel.app/single/contest/${params.id}`)
       },
       {
         path: 'ManageContests',
         element: <AdMinPrivate><ManageContest></ManageContest></AdMinPrivate>,
-        loader: () => fetch('http://localhost:7000/allData')
-        
+        loader: () => fetch('https://serversite12.vercel.app/allData')
+
       },
       {
-        path:'participate',
-        element:<MyParticipate></MyParticipate>
+        path: 'participate',
+        element: <MyParticipate></MyParticipate>
       },
       {
-        path:'myProfile',
+        path: 'myProfile',
         element: <Private><MyProfile></MyProfile></Private>
 
       },
       {
-        path:'submitted',
-        element:<SubmitedPage></SubmitedPage>
+        path: 'submitted',
+        element: <SubmitedPage></SubmitedPage>
       },
       {
-        path:'submission',
-        element:<SeeSubmisson></SeeSubmisson>
+        path: 'submission',
+        element: <SeeSubmisson></SeeSubmisson>
       },
       {
-        path:'WinningContest',
-        element:<WiningContest></WiningContest>
+        path: 'WinningContest',
+        element: <WiningContest></WiningContest>
       }
-     
+
 
     ]
   }
@@ -164,9 +169,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
-      
+
 
     </AuthProvider>
-    
+
   </React.StrictMode>,
 )

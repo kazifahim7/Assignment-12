@@ -3,19 +3,19 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const axiosSecure=axios.create({
-    baseURL:'http://localhost:7000'
+const axiosSecure = axios.create({
+    baseURL: 'https://serversite12.vercel.app'
 })
 const useAxios = () => {
-    const { logout }=useContext(AuthContext)
+    const { logout } = useContext(AuthContext)
 
-     const navigate = useNavigate()
+    const navigate = useNavigate()
 
 
     axiosSecure.interceptors.request.use(function (config) {
         // Do something before request is sent
 
-        config.headers.authorization=`Bearer ${localStorage.getItem('access-token')}`
+        config.headers.authorization = `Bearer ${localStorage.getItem('access-token')}`
 
 
 
@@ -36,11 +36,11 @@ const useAxios = () => {
         // Do something with response error
         if (error.response.status === 401 || error.response.status === 403) {
             await logout()
-            .then(()=>{
-                navigate('/login')
+                .then(() => {
+                    navigate('/login')
 
-            })
-           
+                })
+
         }
 
 
@@ -49,7 +49,7 @@ const useAxios = () => {
 
 
 
-   return axiosSecure;
+    return axiosSecure;
 };
 
 export default useAxios;

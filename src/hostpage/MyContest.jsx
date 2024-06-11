@@ -11,16 +11,16 @@ import usePagination from "../hook/usePagination";
 
 const MyContest = () => {
 
-    const {user}=useContext(AuthContext)
-    const useAxiosSecure=useAxios()
+    const { user } = useContext(AuthContext)
+    const useAxiosSecure = useAxios()
     const [currentPage, setCurrentPage] = useState(0)
-   
+
 
     const itemPerPage = 10
-    const [count]=usePagination()
+    const [count] = usePagination()
 
 
-    console.log(typeof(count))
+    console.log(typeof (count))
 
     let numberOfPage = Math.ceil(count / itemPerPage)
 
@@ -49,26 +49,26 @@ const MyContest = () => {
 
 
 
-    
 
-    const {data=[],isLoading,refetch}=useQuery({
-        queryKey:['mylist',user?.email,currentPage,itemPerPage],
-        queryFn:async()=>{
-            const contest = await useAxiosSecure.get(`http://localhost:7000/host/contest/${user?.email}?page=${currentPage}&size=${itemPerPage}`)
+
+    const { data = [], isLoading, refetch } = useQuery({
+        queryKey: ['mylist', user?.email, currentPage, itemPerPage],
+        queryFn: async () => {
+            const contest = await useAxiosSecure.get(`https://serversite12.vercel.app/host/contest/${user?.email}?page=${currentPage}&size=${itemPerPage}`)
             return contest.data
         }
     })
 
 
 
-    if(isLoading){
+    if (isLoading) {
         return <div className="flex justify-center items-center mt-52"><span className="loading loading-spinner loading-lg"></span></div>
     }
 
-    
 
 
-    const handleDelete=id=>{
+
+    const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -80,30 +80,30 @@ const MyContest = () => {
         }).then((result) => {
 
             useAxiosSecure.delete(`/delete/creator/collection/${id}`)
-            .then(data=>{
-                if(data.data){
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
+                .then(data => {
+                    if (data.data) {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+
+
                     }
-                    refetch()
-                    
-
-                }
-            })
+                })
 
 
 
-            
-          
+
+
         });
 
     }
 
-    const seeComments =(text)=>{
+    const seeComments = (text) => {
         Swal.fire(text)
 
 
@@ -138,9 +138,9 @@ const MyContest = () => {
                                 <td>{contest.status}</td>
                                 <td>
                                     {
-                                        contest.status === 'pending' ? <div><button onClick={()=>handleDelete(contest._id)} className="btn bg-[#e04141] text-white">Delete</button> <Link to={`/dashboard/update/${contest._id}`}><button className="btn bg-[#41b8e0] text-white">Edit</button></Link></div> :'already updated'
+                                        contest.status === 'pending' ? <div><button onClick={() => handleDelete(contest._id)} className="btn bg-[#e04141] text-white">Delete</button> <Link to={`/dashboard/update/${contest._id}`}><button className="btn bg-[#41b8e0] text-white">Edit</button></Link></div> : 'already updated'
                                     }
-                                    
+
 
                                 </td>
                                 <td><Link to={'/dashboard/submitted'}><button className="btn bg-[#41b8e0] text-white">see submission</button></Link></td>
@@ -150,9 +150,9 @@ const MyContest = () => {
                                 </td>
                             </tr>)
                         }
-                       
+
                         {/* row 2 */}
-                       
+
                     </tbody>
                 </table>
             </div>
@@ -166,7 +166,7 @@ const MyContest = () => {
                 <button onClick={handleNext} className="btn bg-[#41b8e0] text-black">Next</button>
             </div>
 
-            
+
         </div>
     );
 };

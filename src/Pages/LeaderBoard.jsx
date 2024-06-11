@@ -30,7 +30,7 @@ const LeaderBoard = () => {
             <div className="overflow-x-auto mb-5">
                 <table className="table table-zebra">
                     {/* head */}
-                    <thead className="bg-[#0ecdb9]">
+                    <thead className="bg-[#0ecdb9] text-black">
                         <tr>
                             <th></th>
                             <th>winer Image</th>

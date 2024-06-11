@@ -13,6 +13,7 @@ const HOme = () => {
             <Promote></Promote>
             <InsPire></InsPire>
             <Slider></Slider>
+            
 
         </div>
     );

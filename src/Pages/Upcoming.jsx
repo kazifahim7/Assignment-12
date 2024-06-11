@@ -5,13 +5,16 @@ import usePublicAxios from "../hook/usePublicAxios";
 const Upcoming = () => {
     const axiospublic=usePublicAxios()
 
-    const {data=[]}=useQuery({
+    const {data=[],isLoading}=useQuery({
         queryKey:['upcoming'],
         queryFn:async()=>{
             const result = await axiospublic.get('/upcoming')
             return result.data
         }
     })
+    if(isLoading){
+        return <div className="flex justify-center items-center pt-72"><span className="loading loading-spinner loading-lg"></span></div>
+    }
 
 
 
