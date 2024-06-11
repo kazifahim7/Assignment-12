@@ -68,10 +68,14 @@ const Navbar = () => {
 
     const [isPosition]=useRole()
 
-    console.log(isPosition)
+ 
+
+    
 
     const [isVerified]=useVerified()
+
     console.log(isVerified)
+    
 
 
 
@@ -142,7 +146,7 @@ const Navbar = () => {
                                         isPosition === 'host' && <NavLink to={'/dashboard/AddContest'}>DashBoard</NavLink>
                                     }
                                     {
-                                        isPosition === 'user' && <NavLink to={'/dashboard/participate'}>DashBoard</NavLink>
+                                        (isPosition === 'user' || isVerified === 'verified') && <NavLink to={'/dashboard/participate'}>Dashboard</NavLink>
                                     }
 
                                     <button onClick={handleOut} className="btn bg-[#0ecdb9] border-none mt-2 text-white">LogOut<FaLongArrowAltRight /> </button>
