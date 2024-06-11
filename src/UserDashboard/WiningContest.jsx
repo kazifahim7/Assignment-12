@@ -66,9 +66,7 @@ const WiningContest = () => {
                                     </tr>)
                                 }</> : <p className="text-center">wining result is empty</p>
                             }
-                            {/* row 1 */}
-                           
-                            {/* row 2 */}
+                            
                             
                         </tbody>
                     </table>
