@@ -6,12 +6,12 @@ const Private = ({children}) => {
     const {user,loading}=useContext(AuthContext)
     const location=useLocation()
 
-    const token=localStorage.getItem('access-token')
+    
 
-    if(loading || !user){
+    if(loading){
         return <div className="flex justify-center items-center pt-72"><span className="loading loading-spinner loading-lg"></span></div>
     }
-    else if(token){
+    else if(user){
         return children
     }
     return <Navigate to={'/login'} state={location?.pathname} replace></Navigate>

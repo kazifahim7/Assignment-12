@@ -86,7 +86,7 @@ const Details = () => {
                             <h1 className="text-5xl font-bold">{singleData.contestName}</h1>
                             <p>participation count: {singleData?.participated}</p>
                             <p className="py-6"><span>Description</span>: {singleData?.description}</p>
-                            <p className="py-2"><span>Contest Prize</span>: {singleData?.prize} $</p>
+                            <p className="py-2"><span>Contest Prize</span>: {singleData?.prize} {typeof (singleData.prize)==='number'&& '$'}</p>
                             <p className="py-2"><span>Contest Price</span>: {singleData?.price} $</p>
                             <p className="py-2 space-x-3"><span>Deadline</span>:
                                 {milliseconds > 0 ? (

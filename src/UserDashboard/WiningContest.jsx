@@ -55,14 +55,16 @@ const WiningContest = () => {
 
 
                             {
-                                data.map((item,index) => <tr key={item._id} className="bg-base-200">
-                                    <th>{index+1}</th>
-                                    <td>{item?.contestName}</td>
-                                    
-                                    <td>{item?.contestType}</td>
-                                    <td className="text-lime-700 font-bold">Win</td>
-                                    <td>congratulation</td>
-                                </tr>)
+                                data.length > 0 ? <>{
+                                    data.map((item, index) => <tr key={item._id} className="bg-base-200">
+                                        <th>{index + 1}</th>
+                                        <td>{item?.contestName}</td>
+
+                                        <td>{item?.contestType}</td>
+                                        <td className="text-lime-700 font-bold">Win</td>
+                                        <td>congratulation</td>
+                                    </tr>)
+                                }</> : <p className="text-center">wining result is empty</p>
                             }
                             {/* row 1 */}
                            
