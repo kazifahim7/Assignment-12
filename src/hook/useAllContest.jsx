@@ -7,12 +7,12 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const useAllContest = () => {
     const axiosPublic=usePublicAxios()
 
-    const { inputData }=useContext(AuthContext)
+    const { inputData, currentPage, itemPerPage }=useContext(AuthContext)
 
     const {data:allData=[],refetch,isLoading}=useQuery({
-        queryKey:['all',inputData],
+        queryKey:['all',inputData,currentPage,itemPerPage],
         queryFn:async()=>{
-            const allContest = await axiosPublic.get(`/allData/everyone?search=${inputData}&sort=${'asc'}`)
+            const allContest = await axiosPublic.get(`/allData/everyone?search=${inputData}&sort=${'asc'}&page=${currentPage}&size=${itemPerPage}`)
             return allContest.data
         }
     })

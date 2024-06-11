@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hook/useAxios";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import usePagination from "../hook/usePagination";
 
 
 
@@ -12,12 +13,48 @@ const MyContest = () => {
 
     const {user}=useContext(AuthContext)
     const useAxiosSecure=useAxios()
+    const [currentPage, setCurrentPage] = useState(0)
+   
+
+    const itemPerPage = 10
+    const [count]=usePagination()
+
+
+    console.log(typeof(count))
+
+    let numberOfPage = Math.ceil(count / itemPerPage)
+
+
+
+
+
+
+    const pages = [...Array(numberOfPage).keys()]
+
+    console.log(pages)
+
+
+    const handlePrev = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNext = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
+
+
+
     
 
     const {data=[],isLoading,refetch}=useQuery({
-        queryKey:['mylist',user?.email],
+        queryKey:['mylist',user?.email,currentPage,itemPerPage],
         queryFn:async()=>{
-            const contest = await useAxiosSecure.get(`http://localhost:7000/host/contest/${user?.email}`)
+            const contest = await useAxiosSecure.get(`http://localhost:7000/host/contest/${user?.email}?page=${currentPage}&size=${itemPerPage}`)
             return contest.data
         }
     })
@@ -120,8 +157,13 @@ const MyContest = () => {
                 </table>
             </div>
 
-            <div>
+            <div className="flex justify-center  py-10 space-x-2">
+                <button onClick={handlePrev} className="btn bg-[#41b8e0]">Prev</button>
 
+                {
+                    pages.map(page => <button onClick={() => setCurrentPage(page)} key={page} className={`btn bg-[#41b8e0] text-black ${currentPage === page && 'bg-orange-400'} `}>{page}</button>)
+                }
+                <button onClick={handleNext} className="btn bg-[#41b8e0] text-black">Next</button>
             </div>
 
             

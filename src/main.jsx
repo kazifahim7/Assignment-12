@@ -35,12 +35,16 @@ import MyParticipate from './UserDashboard/MyParticipate';
 import MyProfile from './UserDashboard/MyProfile';
 import SubmitedPage from './hostpage/SubmitedPage';
 import SeeSubmisson from './hostpage/SeeSubmisson';
+import WiningContest from './UserDashboard/WiningContest';
+import Upcoming from './Pages/Upcoming';
+import LeaderBoard from './Pages/LeaderBoard';
 
 
 
 
 
 const queryClient = new QueryClient()
+
 
 
 const router = createBrowserRouter([
@@ -53,6 +57,11 @@ const router = createBrowserRouter([
       {
         path: '/',
         element:<HOme></HOme>
+      },
+      {
+        path:'/LeaderBoard',
+        element:<LeaderBoard></LeaderBoard>
+
       },
       {
         path: '/allContests/:id',
@@ -69,7 +78,8 @@ const router = createBrowserRouter([
       },
       {
         path:'/allContest',
-        element:<AllContest></AllContest>
+        element:<AllContest></AllContest>,
+        loader: () => fetch('http://localhost:7000/allData')
       },
       {
         path: 'register',
@@ -79,6 +89,10 @@ const router = createBrowserRouter([
         path:'/payment/:id',
         element:<Payment></Payment>,
         loader: ({params}) => fetch(`http://localhost:7000/getSingleContest/${params.id}`)
+      },
+      {
+        path:'/upcomingContest',
+        element:<Upcoming></Upcoming>
       }
      
     ],
@@ -90,7 +104,8 @@ const router = createBrowserRouter([
     children:[
       {
         path: 'ManageUser',
-        element: <AdMinPrivate><ManageUser></ManageUser></AdMinPrivate>
+        element: <AdMinPrivate><ManageUser></ManageUser></AdMinPrivate>,
+        loader: () => fetch('http://localhost:7000/allusers')
 
       },
       {
@@ -99,7 +114,8 @@ const router = createBrowserRouter([
       },
       {
         path:'myContest',
-        element:<MyContest></MyContest>
+        element: <HostPrivate><MyContest></MyContest></HostPrivate>,
+        
       },
       {
         path:'update/:id',
@@ -108,7 +124,9 @@ const router = createBrowserRouter([
       },
       {
         path: 'ManageContests',
-        element: <AdMinPrivate><ManageContest></ManageContest></AdMinPrivate>
+        element: <AdMinPrivate><ManageContest></ManageContest></AdMinPrivate>,
+        loader: () => fetch('http://localhost:7000/allData')
+        
       },
       {
         path:'participate',
@@ -116,7 +134,7 @@ const router = createBrowserRouter([
       },
       {
         path:'myProfile',
-        element:<MyProfile></MyProfile>
+        element: <Private><MyProfile></MyProfile></Private>
 
       },
       {
@@ -126,6 +144,10 @@ const router = createBrowserRouter([
       {
         path:'submission',
         element:<SeeSubmisson></SeeSubmisson>
+      },
+      {
+        path:'WinningContest',
+        element:<WiningContest></WiningContest>
       }
      
 

@@ -43,7 +43,7 @@ const SeeSubmisson = () => {
             participateUserPhoto: singleData?.participateUserPhoto,
             
             
-            status: singleData?.status,
+            status: 'win',
             othersId:submission.filter(item=>item._id!==id).map(item=>item._id),
             submissionId:id,
 

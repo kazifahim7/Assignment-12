@@ -5,6 +5,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import { useRef, useState } from "react";
 import useAxios from "../hook/useAxios";
+import { useLoaderData } from "react-router-dom";
 
 
 
@@ -16,13 +17,44 @@ const ManageContest = () => {
 
 
    const [id,setId]=useState(null)
+    const [currentPage, setCurrentPage] = useState(0)
+    const itemPerPage = 10
+
+    const { count } = useLoaderData()
+
+    console.log(typeof (count))
+
+    let numberOfPage = Math.ceil(count / itemPerPage)
+
+
+
+
+
+
+    const pages = [...Array(numberOfPage).keys()]
+
+    console.log(pages)
+
+
+    const handlePrev = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNext = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
     
    
 
     const {data:allCOntest=[],refetch,isLoading}=useQuery({
-        queryKey:['allCOntest'],
+        queryKey:['allCOntest',currentPage,itemPerPage],
         queryFn:async()=>{
-            const contest = await useAxiosSecure.get('/allContes/for/Admin')
+            const contest = await useAxiosSecure.get(`/allContes/for/Admin?page=${currentPage}&size=${itemPerPage}`)
             return contest.data;
         }
     })
@@ -199,6 +231,16 @@ const ManageContest = () => {
 
                     </tbody>
                 </table>
+
+                <div className="flex justify-center  py-10 space-x-2">
+                    <button onClick={handlePrev} className="btn bg-[#41b8e0]">Prev</button>
+
+                    {
+                        pages.map(page => <button onClick={() => setCurrentPage(page)} key={page} className={`btn bg-[#41b8e0] text-black ${currentPage === page && 'bg-orange-400'} `}>{page}</button>)
+                    }
+                    <button onClick={handleNext} className="btn bg-[#41b8e0] text-black">Next</button>
+                </div>
+
             </div>
 
             <div>

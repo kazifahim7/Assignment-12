@@ -16,6 +16,21 @@ const AuthProvider = ({children}) => {
     const [title, setTitle] = useState('Book Competition')
 
     console.log(title)
+
+    
+    
+    const [currentPage,setCurrentPage]=useState(0)
+    const itemPerPage=10
+
+   
+
+    
+  
+
+   
+
+    
+
     
 
 
@@ -118,7 +133,12 @@ const AuthProvider = ({children}) => {
         setInputData,
         inputData,
         setTitle,
-        title
+        title,
+     
+        currentPage,
+         setCurrentPage,
+         itemPerPage
+
 
 
     }
