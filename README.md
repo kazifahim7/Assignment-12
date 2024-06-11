@@ -29,7 +29,7 @@ Welcome to ContestHub, the ultimate platform where innovation meets recognition!
 
 ## Repository Information
 
-For more details and to contribute, visit our [GitHub Repository](https://github.com/yourusername/contesthub).
+For more details and to contribute, visit our [GitHub Repository](https://github.com/programming-hero-web-course1/b9a12-client-side-kazifahim7).
 
 ## How to Use ContestHub
 
