@@ -7,6 +7,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { ImSpinner9 } from "react-icons/im";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
+import usePublicAxios from "../hook/usePublicAxios";
 
 
 const LogInPage = () => {
@@ -16,6 +17,8 @@ const LogInPage = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
+
+    const axiosPublic=usePublicAxios()
 
 
     const handleLogIn = (e) => {
@@ -56,6 +59,18 @@ const LogInPage = () => {
         googleLog()
             .then(data => {
                 const currentUser = data.user;
+
+                 const userInfo = {
+                    name: data.user?.displayName, 
+                    image: data.user?.photoURL,
+                    status: 'verified',
+                    role: 'user',
+                    email: data.user?.email,
+                }
+
+                axiosPublic.post('/users', userInfo)
+                    .then(data => console.log(data.data))
+
                 console.log('i am from google', currentUser)
                 Swal.fire({
                     title: "Google logIn success",

@@ -28,6 +28,8 @@ const Sidebar = () => {
 
     const [isPosition]=useRole()
 
+    console.log(isPosition)
+
     // Sidebar Responsive Handler
     const handleToggle = () => {
         setActive(!isActive)
@@ -187,7 +189,7 @@ const Sidebar = () => {
                             {/* user routes */}
 
                             {
-                                isPosition==='user'&&<>
+                                isPosition==='user' && <>
 
                                     <NavLink
                                         to='/dashboard/participate'

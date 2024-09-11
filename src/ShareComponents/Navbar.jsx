@@ -13,11 +13,11 @@ import useVerified from "../hook/useVerified";
 
 const Navbar = () => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
-    const [show ,setShow]=useState(false)
+    const [show, setShow] = useState(false)
 
-    const { user, logout, setLoading }=useContext(AuthContext)
-    const navigate=useNavigate()
-    
+    const { user, logout, setLoading } = useContext(AuthContext)
+    const navigate = useNavigate()
+
 
 
     useEffect(() => {
@@ -38,44 +38,44 @@ const Navbar = () => {
         }
     }
 
-    const handleClick=()=>{
+    const handleClick = () => {
         setShow(!show)
         console.log(show)
 
     }
 
-    const handleOut=()=>{
+    const handleOut = () => {
         logout()
-        .then(()=>{
-            Swal.fire({
-                title: "LogOut success",
-                text: "You clicked the button!",
-                icon: "success"
-            });
-            navigate('/')
-        })
-        .catch(()=>{
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-            });
-            setLoading(false)
-        
-        })
+            .then(() => {
+                Swal.fire({
+                    title: "LogOut success",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
+                navigate('/')
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                });
+                setLoading(false)
+
+            })
 
     }
 
-    const [isPosition]=useRole()
+    const [isPosition] = useRole()
 
- 
 
-    
 
-    const [isVerified]=useVerified()
+
+
+    const [isVerified] = useVerified()
 
     console.log(isVerified)
-    
+
 
 
 
@@ -95,7 +95,7 @@ const Navbar = () => {
                             <NavLink to={'/LeaderBoard'}>LeaderBoard</NavLink>
                             <NavLink to={'/upcomingContest'}>Upcoming</NavLink>
                             <NavLink to={'/news'}>News</NavLink>
-                            
+
                         </ul>
                     </div>
                     <div className="flex justify-center items-center gap-2">
@@ -131,13 +131,13 @@ const Navbar = () => {
                     {
                         user ? <div title={user?.displayName} onClick={handleClick} className="avatar">
                             <div className="w-16 rounded-full border-4">
-                                <img src={user?.photoURL} alt="loading"/>
+                                <img src={user?.photoURL} alt="loading" />
                             </div>
 
                             {
-                                show && <div  className="absolute top-14 right-16 border-2 z-40 w-40 h-28 rounded-l-2xl rounded-b-2xl bg-[#1f2340] p-5 text-white ">
+                                show && <div className="absolute top-14 right-16 border-2 z-40 w-40 h-28 rounded-l-2xl rounded-b-2xl bg-[#1f2340] p-5 text-white ">
 
-                                    
+
 
                                     {
                                         isPosition === 'admin' && <NavLink to={'/dashboard/ManageUser'}>DashBoard</NavLink>
@@ -145,12 +145,11 @@ const Navbar = () => {
                                     {
                                         isPosition === 'host' && <NavLink to={'/dashboard/AddContest'}>DashBoard</NavLink>
                                     }
-                                    {
-                                        (isPosition === 'user' || isVerified === 'verified') && <NavLink to={'/dashboard/participate'}>Dashboard</NavLink>
-                                    }
+                                    {(isPosition !== 'admin' && isPosition !== 'host' || isPosition === 'user') && <NavLink to={'/dashboard/participate'}>Dashboard</NavLink>}
+
 
                                     <button onClick={handleOut} className="btn bg-[#0ecdb9] border-none mt-2 text-white">LogOut<FaLongArrowAltRight /> </button>
-                                  
+
 
 
                                 </div>
@@ -159,20 +158,20 @@ const Navbar = () => {
                     }
 
 
-             
 
 
 
-                   
 
-                    
+
+
+
 
 
                 </div>
-                
+
             </div>
 
-            
+
         </div>
     );
 };

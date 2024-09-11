@@ -23,48 +23,42 @@ const SLiderINfo = () => {
     })
 
     return (
-       <div className='container mx-auto w-[80%] p-10 rounded-xl '>
-            <Swiper
-                spaceBetween={10}
-                centeredSlides={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper rounded-xl"
-            >
-
-                {allData?.slice(0,4).map(item => <SwiperSlide key={item._id}>
-                    <div className="card bg-[#15151580] text-white shadow-xl">
-                        <figure className="px-10 pt-10">
-                            <img src={item?.hostImage} alt="image" className="rounded-full w-40" />
-                        </figure>
-                        <div className="card-body items-center text-center">
-                            <h2 className="card-title capitalize">{item?.hostName}</h2>
-                            <p>Contest name : {item?.contestName}</p>
-                            <p>participated : {item?.participated}</p>
-                            <p>{item?.description.slice(0,70)} </p>
-                        </div>
-                    </div>
-
-                </SwiperSlide>)}
-
-
-
-               
-                
-                
-                
-
-            </Swiper>
-       </div>
-
-
+      <div className="container mx-auto w-[80%] p-10 rounded-xl ">
+        <Swiper
+          spaceBetween={10}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper rounded-xl"
+        >
+          {allData?.slice(0, 4).map((item) => (
+            <SwiperSlide key={item._id}>
+              <div className="card bg-[#15151580] text-white shadow-xl">
+                <figure className="px-10 pt-10">
+                  <img
+                    src="https://i.ibb.co.com/MRG3VWX/Whats-App-Image-2024-07-01-at-23-35-23-c8a7e828-prev-ui.png"
+                    alt="image"
+                    className="rounded-full w-40"
+                  />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title capitalize">{item?.hostName}</h2>
+                  <p>Contest name : {item?.contestName}</p>
+                  <p>participated : {item?.participated}</p>
+                  <p>{item?.description.slice(0, 70)} </p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     );
 };
 

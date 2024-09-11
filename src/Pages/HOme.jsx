@@ -3,6 +3,7 @@ import HomeContest from "../componests/HomeContest";
 import InsPire from "../componests/InsPire";
 import Promote from "../componests/Promote";
 import Slider from "../componests/Slider";
+import Sponsor from "./Sponsar";
 
 
 const HOme = () => {
@@ -13,6 +14,7 @@ const HOme = () => {
             <Promote></Promote>
             <InsPire></InsPire>
             <Slider></Slider>
+            <Sponsor></Sponsor>
             
 
         </div>
